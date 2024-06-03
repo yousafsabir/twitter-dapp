@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { WagmiProvider } from "wagmi";
-import { QueryClientProvider } from "@tanstack/react-query";
 
-import {
-  wagmiConfig,
-  queryClient,
-  RootLayout as _RootLayout,
-} from "@/lib/config";
+import { RootLayout } from "@/lib/config";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,7 +19,7 @@ export default function AppLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <_RootLayout>{children}</_RootLayout>
+        <RootLayout>{children}</RootLayout>
       </body>
     </html>
   );
