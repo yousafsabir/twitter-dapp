@@ -1,20 +1,26 @@
 "use client";
 
-import { type State, WagmiProvider } from "wagmi";
+import { WagmiProvider } from "wagmi";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { ConnectKitProvider } from "connectkit";
+import { cookieToInitialState } from "wagmi";
 
 import { wagmiConfig, queryClient } from "@/lib/config";
 import React from "react";
 
 interface Props {
   children: React.ReactNode;
-  wagmiState: State | undefined;
+  wagmiCookie?: string | null;
 }
 
-export function RootLayout({ children }: Props) {
+export function RootLayout({ children, wagmiCookie }: Props) {
+  const wagmiInitialState = cookieToInitialState(wagmiConfig, wagmiCookie);
+
   return (
-    <WagmiProvider config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <WagmiProvider config={wagmiConfig} initialState={wagmiInitialState}>
+      <QueryClientProvider client={queryClient}>
+        <ConnectKitProvider>{children}</ConnectKitProvider>
+      </QueryClientProvider>
     </WagmiProvider>
   );
 }
