@@ -13,7 +13,7 @@ interface Props {
   wagmiCookie?: string | null;
 }
 
-export function RootLayout({ children, wagmiCookie }: Props) {
+export function Web3Provider({ children, wagmiCookie }: Props) {
   const wagmiInitialState = cookieToInitialState(wagmiConfig, wagmiCookie);
 
   return (
